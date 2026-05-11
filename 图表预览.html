@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RuoYi AI 软件设计规格说明书 - 图表预览</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        header p {
+            opacity: 0.9;
+        }
+        .chart-container {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .chart-title {
+            font-size: 1.5rem;
+            color: #1890ff;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e6f7ff;
+        }
+        .chart-description {
+            background: #fafafa;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            font-size: 0.95rem;
+            color: #666;
+            border-left: 4px solid #1890ff;
+        }
+        .chart-description h4 {
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+        }
+        .navigation {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .navigation h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .nav-links a {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #e6f7ff;
+            color: #1890ff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .nav-links a:hover {
+            background: #1890ff;
+            color: white;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>RuoYi AI 软件设计规格说明书</h1>
+            <p>用例分析与类设计 - 图表预览</p>
+        </header>
+        
+        <nav class="navigation">
+            <h3>图表导航</h3>
+            <div class="nav-links">
+                <a href="#chart1">图2.1 系统用例图</a>
+                <a href="#chart2">图2.2 用例关系图</a>
+                <a href="#chart3">图3.1 系统类图</a>
+                <a href="#chart4">图3.2 类关系类型说明图</a>
+            </div>
+        </nav>
+
+        <!-- 图2.1 系统用例图 -->
+        <div class="chart-container" id="chart1">
+            <h2 class="chart-title">图2.1 RuoYi AI 系统用例图</h2>
+            <div class="mermaid">
+graph TB
+    subgraph 参与者
+        A([👤 游客])
+        B([👤 普通用户])
+        C([👤 管理员])
+    end
+    
+    subgraph 用户功能
+        UC1((UC1: 用户登录))
+        UC2((UC2: 修改密码))
+        UC3((UC3: AI聊天问答))
+        UC4((UC4: 语音输入))
+        UC5((UC5: 文件上传))
+        UC6((UC6: 文件下载))
+        UC7((UC7: 文件预览))
+        UC8((UC8: 数字人交互))
+        UC9((UC9: 查看会话历史))
+    end
+    
+    subgraph 管理员功能
+        UC10((UC10: 用户管理))
+        UC11((UC11: 角色管理))
+        UC12((UC12: 数字人配置))
+        UC13((UC13: 用户数据分析))
+        UC14((UC14: 系统配置))
+    end
+    
+    A --> UC1
+    UC1 --> B
+    
+    B --> UC2
+    B --> UC3
+    B --> UC4
+    B --> UC5
+    B --> UC6
+    B --> UC7
+    B --> UC8
+    B --> UC9
+    
+    C --> UC10
+    C --> UC11
+    C --> UC12
+    C --> UC13
+    C --> UC14
+    
+    classDef participant fill:#1890ff,stroke:#333,color:#fff
+    classDef usecase fill:#e6f7ff,stroke:#1890ff,color:#333
+    classDef adminUsecase fill:#fff7e6,stroke:#fa8c16,color:#333
+    
+    class A,B,C participant
+    class UC1,UC2,UC3,UC4,UC5,UC6,UC7,UC8,UC9 usecase
+    class UC10,UC11,UC12,UC13,UC14 adminUsecase
+            </div>
+            <div class="chart-description">
+                <h4>说明</h4>
+                <p>该用例图展示了RuoYi AI系统的整体功能全景。系统包含三类参与者：<strong>游客</strong>（只能登录注册）、<strong>普通用户</strong>（使用AI聊天、文件管理、数字人交互等功能）、<strong>管理员</strong>（拥有最高权限，可管理系统用户、角色、数字人配置等）。图中清晰地呈现了不同角色与系统功能之间的对应关系。</p>
+            </div>
+        </div>
+
+        <!-- 图2.2 用例关系图 -->
+        <div class="chart-container" id="chart2">
+            <h2 class="chart-title">图2.2 RuoYi AI 用例关系图</h2>
+            <div class="mermaid">
+graph TB
+    A([👤 游客])
+    B([👤 普通用户])
+    C([👤 管理员])
+    
+    subgraph 登录模块
+        UC1((UC1: 用户登录))
+        UC2((UC2: 修改密码))
+        UC1 -.->|"extends"| UC2
+    end
+    
+    subgraph AI聊天模块
+        UC3((UC3: AI聊天问答))
+        UC4((UC4: 语音输入))
+        UC9((UC9: 会话历史))
+        UC8((UC8: 数字人交互))
+        
+        UC4 -->|"includes"| UC3
+        UC9 -->|"includes"| UC3
+        UC8 -.->|"extends"| UC3
+    end
+    
+    subgraph 文件模块
+        UC5((UC5: 文件上传))
+        UC6((UC6: 文件下载))
+        UC7((UC7: 文件预览))
+        
+        UC6 -.->|"extends"| UC5
+        UC7 -.->|"extends"| UC5
+    end
+    
+    subgraph 用户管理模块
+        UC10((UC10: 用户管理))
+        UC13((UC13: 用户数据分析))
+        
+        UC13 -->|"includes"| UC10
+    end
+    
+    subgraph 角色管理模块
+        UC11((UC11: 角色管理))
+        UC12((UC12: 数字人配置))
+        UC14((UC14: 系统配置))
+    end
+    
+    A --> UC1
+    B --> UC3
+    B --> UC4
+    B --> UC5
+    B --> UC6
+    B --> UC7
+    B --> UC8
+    B --> UC9
+    C --> UC10
+    C --> UC11
+    C --> UC12
+    C --> UC13
+    C --> UC14
+    
+    classDef usecase fill:#e6f7ff,stroke:#1890ff,color:#333
+    classDef includeRelation stroke:#52c41a,color:#52c41a
+    classDef extendRelation stroke:#fa8c16,color:#fa8c16,stroke-dasharray:5,5
+    
+    class UC1,UC2,UC3,UC4,UC5,UC6,UC7,UC8,UC9,UC10,UC11,UC12,UC13,UC14 usecase
+            </div>
+            <div class="chart-description">
+                <h4>说明</h4>
+                <p>用例关系图展示了各用例之间的依赖和扩展关系：</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>包含关系（includes）</strong>：UC4（语音输入）和 UC9（会话历史）被 UC3（AI聊天问答）包含</li>
+                    <li><strong>扩展关系（extends）</strong>：UC2（修改密码）扩展 UC1（登录）；UC8（数字人交互）扩展 UC3（AI聊天）</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 图3.1 系统类图 -->
+        <div class="chart-container" id="chart3">
+            <h2 class="chart-title">图3.1 RuoYi AI 系统类图</h2>
+            <div class="mermaid">
+classDiagram
+    namespace 用户管理模块 {
+        class SysUser {
+            +Long userId
+            +String username
+            +String password
+            +String nickName
+            +String email
+            +String phone
+            +String avatar
+            +Long deptId
+            +String status
+            +Date createTime
+        }
+        
+        class SysRole {
+            +Long roleId
+            +String roleName
+            +String roleKey
+            +String description
+            +String status
+            +Date createTime
+        }
+        
+        class SysDept {
+            +Long deptId
+            +Long parentId
+            +String deptName
+            +Integer orderNum
+            +String status
+            +Date createTime
+        }
+        
+        class UserRole {
+            +Long userId
+            +Long roleId
+        }
+        
+        SysUser "1" o-- "n" UserRole : 关联
+        SysRole "1" o-- "n" UserRole : 关联
+        SysUser "n" --> "1" SysDept : 所属部门
+    }
+    
+    namespace 聊天模块 {
+        class ChatSession {
+            +Long sessionId
+            +Long userId
+            +String title
+            +String modelName
+            +String systemPrompt
+            +String status
+            +Date createTime
+        }
+        
+        class ChatMessage {
+            +Long messageId
+            +Long sessionId
+            +String role
+            +String content
+            +String modelName
+            +Integer tokenUsage
+            +Date createTime
+        }
+        
+        class ChatModel {
+            +Long modelId
+            +String modelName
+            +String modelKey
+            +String apiUrl
+            +String apiKey
+        }
+        
+        class AiService {
+            +chat() String
+            +streamChat() Flux
+            +saveSession() Long
+        }
+        
+        ChatSession "1" --> "n" ChatMessage : 包含
+        AiService ..> ChatModel : 依赖
+    }
+    
+    namespace 文件模块 {
+        class SysFile {
+            +Long fileId
+            +String fileName
+            +String filePath
+            +Long fileSize
+            +String fileType
+            +String mimeType
+            +Long uploadBy
+            +Date createTime
+        }
+        
+        class FileServiceImpl {
+            +upload() SysFile
+            +download() void
+            +delete() int
+        }
+    }
+    
+    namespace 数字人模块 {
+        class DigitalHuman {
+            +Long id
+            +String name
+            +String modelPath
+            +Float scale
+            +String isDefault
+            +String status
+        }
+        
+        class Live2DService {
+            +loadModel() void
+            +playMotion() void
+            +setExpression() void
+        }
+    }
+    
+    class UserController {
+        +list() TableDataInfo
+        +add() AjaxResult
+        +edit() AjaxResult
+        +remove() AjaxResult
+    }
+    
+    class ChatController {
+        +send() AjaxResult
+        +streamSend() Flux
+        +createSession() AjaxResult
+    }
+    
+    class FileController {
+        +upload() AjaxResult
+        +download() void
+        +preview() void
+    }
+    
+    class DigitalHumanController {
+        +list() TableDataInfo
+        +upload() AjaxResult
+        +setDefault() AjaxResult
+    }
+    
+    class ISysUserService {
+        <<interface>>
+        +selectUserList()
+        +insertUser()
+        +updateUser()
+    }
+    
+    class SysUserServiceImpl {
+        +selectUserList()
+        +insertUser()
+        +updateUser()
+    }
+    
+    UserController ..> ISysUserService : 实现
+    SysUserServiceImpl ..|> ISysUserService : 实现
+    ChatController ..> AiService : 依赖
+    FileController ..> FileServiceImpl : 依赖
+    DigitalHumanController ..> Live2DService : 依赖
+            </div>
+            <div class="chart-description">
+                <h4>说明</h4>
+                <p>该类图展示了RuoYi AI系统的核心类结构和模块划分，系统按照业务领域划分为四个主要模块：</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>用户管理模块</strong>：SysUser、SysRole、SysDept、UserRole，支持多对多角色分配</li>
+                    <li><strong>聊天模块</strong>：ChatSession、ChatMessage、ChatModel、AiService，一对多关联</li>
+                    <li><strong>文件模块</strong>：SysFile、FileServiceImpl，负责文件管理</li>
+                    <li><strong>数字人模块</strong>：DigitalHuman、Live2DService，负责数字人交互</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 图3.2 类关系类型说明图 -->
+        <div class="chart-container" id="chart4">
+            <h2 class="chart-title">图3.2 类关系类型说明图</h2>
+            <div class="mermaid">
+graph TB
+    subgraph 继承关系
+        direction LR
+        C1_1["SysUser<br/>(用户实体)"]
+        C1_2["LoginUser<br/>(登录用户信息)"]
+        C1_1 -.->|"extends| 继承"| C1_2
+    end
+    
+    subgraph 实现关系
+        direction LR
+        C2_1["ISysUserService<br/>&lt;&lt;interface&gt;&gt;"]
+        C2_2["SysUserServiceImpl<br/>(服务实现)"]
+        C2_1 -.->|"realizes 实现"| C2_2
+    end
+    
+    subgraph 依赖关系
+        direction LR
+        C3_1["ChatController<br/>(控制器)"]
+        C3_2["AiService<br/>(AI服务)"]
+        C3_1 -.->|"uses 依赖"| C3_2
+    end
+    
+    subgraph 关联关系
+        direction LR
+        C4_1["ChatSession<br/>(会话)"]
+        C4_2["ChatMessage<br/>(消息)"]
+        C4_1 -->|"1 : n 关联"| C4_2
+    end
+    
+    subgraph 聚合关系
+        direction LR
+        C5_1["User<br/>(用户)"]
+        C5_2["Role<br/>(角色)"]
+        C5_1 ◇-->|"聚合 可独立"| C5_2
+    end
+    
+    subgraph 组合关系
+        direction LR
+        C6_1["Dept<br/>(部门)"]
+        C6_2["User<br/>(用户)"]
+        C6_1 ●-->|"组合 不可独立"| C6_2
+    end
+    
+    style C1_1 fill:#e6f7ff,stroke:#1890ff,color:#333
+    style C1_2 fill:#bae7ff,stroke:#1890ff,color:#333
+    style C2_1 fill:#d9f7be,stroke:#52c41a,color:#333
+    style C2_2 fill:#d9f7be,stroke:#52c41a,color:#333
+    style C3_1 fill:#ffe7ba,stroke:#fa8c16,color:#333
+    style C3_2 fill:#ffe7ba,stroke:#fa8c16,color:#333
+    style C4_1 fill:#ffbb96,stroke:#ff4d4f,color:#333
+    style C4_2 fill:#ffbb96,stroke:#ff4d4f,color:#333
+    style C5_1 fill:#d8d8d8,stroke:#595959,color:#333
+    style C5_2 fill:#d8d8d8,stroke:#595959,color:#333
+    style C6_1 fill:#bfbfbf,stroke:#595959,color:#333
+    style C6_2 fill:#bfbfbf,stroke:#595959,color:#333
+            </div>
+            <div class="chart-description">
+                <h4>说明</h4>
+                <p>类关系图展示了类与类之间可能存在的六种关系类型：</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>继承关系（Generalization）</strong>：子类继承父类，自动拥有父类的属性和方法</li>
+                    <li><strong>实现关系（Realization）</strong>：类实现接口，必须提供接口中定义的所有方法</li>
+                    <li><strong>依赖关系（Dependency）</strong>：一个类临时使用另一个类</li>
+                    <li><strong>关联关系（Association）</strong>：类与类之间的持久联系，可标注多重性</li>
+                    <li><strong>聚合关系（Aggregation）</strong>：整体与部分的关系，部分可以独立存在</li>
+                    <li><strong>组合关系（Composition）</strong>：整体与部分的关系，部分不能独立存在</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <p>RuoYi AI 软件设计规格说明书 - 图表预览</p>
+            <p>文档版本：V1.5 | 编写日期：2026年4月14日</p>
+        </footer>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            flowchart: {
+                htmlLabels: true,
+                curve: 'basis'
+            },
+            class: {
+                htmlLabels: true
+            }
+        });
+    </script>
+</body>
+</html>
